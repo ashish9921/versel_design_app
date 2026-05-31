@@ -1,0 +1,180 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap");
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-canvas: var(--canvas);
+  --color-stone-soft: var(--stone-soft);
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 10px;
+}
+
+:root {
+  /* Brand palette — timeless editorial */
+  --canvas: oklch(0.962 0.005 80);          /* #F5F3EE off-white */
+  --ink: oklch(0.205 0 0);                   /* #1A1A1A charcoal */
+  --stone-soft: oklch(0.55 0.005 80);        /* secondary stone gray */
+
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--canvas);
+  --card-foreground: var(--ink);
+  --popover: var(--canvas);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--canvas);
+  --secondary: oklch(0.92 0.007 80);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.93 0.005 80);
+  --muted-foreground: oklch(0.45 0.005 80);
+  --accent: oklch(0.72 0.045 65);            /* #B5A18B muted brass */
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: var(--canvas);
+  --border: oklch(0.205 0 0 / 0.08);
+  --input: oklch(0.205 0 0 / 0.12);
+  --ring: oklch(0.72 0.045 65);
+}
+
+.dark {
+  --canvas: oklch(0.16 0 0);
+  --ink: oklch(0.96 0.005 80);
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: oklch(0.2 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.2 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--canvas);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.72 0.045 65);
+  --accent-foreground: var(--canvas);
+  --border: oklch(1 0 0 / 0.1);
+  --input: oklch(1 0 0 / 0.15);
+  --ring: oklch(0.72 0.045 65);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 35%, transparent);
+    color: var(--ink);
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .reveal-delay-1 { animation-delay: 0.12s; }
+  .reveal-delay-2 { animation-delay: 0.24s; }
+  .reveal-delay-3 { animation-delay: 0.36s; }
+  .reveal-delay-4 { animation-delay: 0.48s; }
+
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hover-zoom {
+    overflow: hidden;
+  }
+  .hover-zoom img {
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hover-zoom:hover img {
+    transform: scale(1.04);
+  }
+
+  /* Glassy pill surface (header + before/after labels) */
+  .glass-pill {
+    background: color-mix(in oklab, var(--background) 55%, transparent);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid color-mix(in oklab, var(--foreground) 8%, transparent);
+    border-radius: 9999px;
+    box-shadow:
+      0 1px 0 color-mix(in oklab, white 50%, transparent) inset,
+      0 10px 40px -10px color-mix(in oklab, var(--foreground) 20%, transparent);
+  }
+}
+
+/* Hide native cursor only on fine-pointer devices when custom cursor is active */
+.cursor-none-fine,
+.cursor-none-fine * {
+  cursor: none !important;
+}
+@media (pointer: coarse) {
+  .cursor-none-fine,
+  .cursor-none-fine * {
+    cursor: auto !important;
+  }
+}
