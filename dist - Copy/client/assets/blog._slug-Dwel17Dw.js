@@ -1,1 +1,0 @@
-import{o as e,a as o}from"./index-6RCyzsgw.js";const n=()=>e.jsxs("div",{className:"min-h-[60vh] flex flex-col items-center justify-center gap-4",children:[e.jsx("h1",{className:"font-serif text-4xl",children:"Article not found"}),e.jsx(o,{to:"/blog",className:"eyebrow text-accent border-b border-accent",children:"Back to Blog"})]});export{n as notFoundComponent};
